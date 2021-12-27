@@ -9,14 +9,14 @@ const {
 } = require('./middlewares/error.handler');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 
-const whitelist = ['http://localhost:3000, http://localhost:8000', 'https://myapp.com'];
+const whitelist = ['http://localhost:3000, http://localhost:8000'];
 
 const options = {origin: (origin, callback) => {
-  if(whitelist.includes(origin)) {
+  if(whitelist.includes(origin) || !origin) {
     callback(null, true);
   } else {
     callback(new Error('No permitido'))
@@ -27,7 +27,7 @@ const options = {origin: (origin, callback) => {
 app.use(cors(options));
 
 app.get('/', (req, res) => {
-  res.send('Okay');
+  res.send('Random products API');
 });
 
 routerApi(app);
