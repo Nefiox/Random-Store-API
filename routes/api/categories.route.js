@@ -1,12 +1,12 @@
 const express = require('express');
 
-const CategoryService = require('./../services/category.service');
-const validatorHandler = require('./../middlewares/validator.handler');
+const CategoryService = require('../../services/category.service');
+const validatorHandler = require('../../middlewares/validator.handler');
 const {
   createCategorySchema,
   updateCategorySchema,
   getCategorySchema,
-} = require('./../schemas/category.schema');
+} = require('../../schemas/category.schema');
 
 const router = express.Router();
 const service = new CategoryService();
