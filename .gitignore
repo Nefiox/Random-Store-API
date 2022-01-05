@@ -198,3 +198,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 postgres_data
+mysql_data
