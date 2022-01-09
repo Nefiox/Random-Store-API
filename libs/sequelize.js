@@ -10,6 +10,6 @@ const URI = `postgres://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}/${
 const sequelize = new Sequelize(URI, { dialect: 'postgres', logging: true }); // Se crea una instancia de Sequelize, gestiona el pooling.
 
 setupModels(sequelize);
-sequelize.sync();
+// sequelize.sync();
 
 module.exports = sequelize;
