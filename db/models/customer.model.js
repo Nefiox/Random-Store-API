@@ -1,7 +1,7 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
-const USER_TABLE = 'users'; // nombre de la tabla
+const CUSTOMER_TABLE = 'customers'; // nombre de la tabla
 
-const UserSchema = {
+const CustomerSchema = {
   // El esquema define la estructura de la BD.
   id: {
     allowNull: false,
@@ -9,19 +9,18 @@ const UserSchema = {
     primaryKey: true,
     type: DataTypes.INTEGER,
   },
-  email: {
-    allowNull: false,
-    type: DataTypes.STRING,
-    unique: true,
-  },
-  password: {
+  name: {
     allowNull: false,
     type: DataTypes.STRING,
   },
-  role: {
+  lastName: {
     allowNull: false,
     type: DataTypes.STRING,
-    defaultValue: 'customer',
+    field: 'last_name'
+  },
+  phone: {
+    allowNull: false,
+    type: DataTypes.STRING,
   },
   createdAt: {
     allowNull: false,
@@ -31,7 +30,7 @@ const UserSchema = {
   },
 };
 
-class User extends Model {
+class Customer extends Model {
   static associate() {
     // models
   }
@@ -39,11 +38,11 @@ class User extends Model {
   static config(sequelize) {
     return {
       sequelize,
-      tableName: USER_TABLE,
-      modelName: 'User',
+      tableName: CUSTOMER_TABLE,
+      modelName: 'Customer',
       timestamps: false,
     };
   }
 }
 
-module.exports = { USER_TABLE, UserSchema, User };
+module.exports = { CUSTOMER_TABLE, CustomerSchema, Customer };
