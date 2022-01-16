@@ -47,8 +47,8 @@ const ProductSchema = {
 };
 
 class Product extends Model {
-  static associate() {
-    // this.belongsTo(models.User, { as: 'user' });
+  static associate(models) {
+    this.belongsTo(models.Category, { as: 'category' });
   }
 
   static config(sequelize) {
