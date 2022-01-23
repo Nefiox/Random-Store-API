@@ -5,7 +5,7 @@ const { models } = require('../libs/sequelize');
 
 class ProductsService {
   constructor() {
-    this.products = [];
+    // this.products = [];
     // this.generate();
   }
 
