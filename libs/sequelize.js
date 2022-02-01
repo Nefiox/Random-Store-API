@@ -11,15 +11,9 @@ const options = {
 if (config.isProd) {
   options.dialectOptions = {
     ssl: {
-<<<<<<< HEAD
-      rejectUnauthorized: false
-    }
-  }
-=======
       rejectUnauthorized: false,
     },
   };
->>>>>>> production
 }
 
 const sequelize = new Sequelize(config.dbUrl, options); // Se crea una instancia de Sequelize, gestiona el pooling.
