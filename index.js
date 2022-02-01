@@ -1,6 +1,7 @@
 const express = require('express');
 const routerApi = require('./routes');
 const cors = require('cors');
+const { checkApiKey } = require('./middlewares/auth.handler');
 
 const {
   logErrors,
@@ -30,6 +31,10 @@ app.use(cors(options));
 
 app.get('/', (req, res) => {
   res.send('Random products API');
+});
+
+app.get('/nuevaruta', checkApiKey, (req, res) => {
+  res.send('Testing API key auth');
 });
 
 routerApi(app);
