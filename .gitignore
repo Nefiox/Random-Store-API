@@ -199,3 +199,6 @@ $RECYCLE.BIN/
 *.lnk
 postgres_data
 mysql_data
+
+pass-hash.js
+pass-verify.js
