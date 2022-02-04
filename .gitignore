@@ -202,3 +202,5 @@ mysql_data
 
 pass-hash.js
 pass-verify.js
+token-sign.js
+token-verify.js

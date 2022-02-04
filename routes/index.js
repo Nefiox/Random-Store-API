@@ -16,7 +16,6 @@ function routerApi(app) {
   router.use('/orders', orderRouter);
   router.use('/customers', customerRouter);
   router.use('/auth', authRouter);
-
 }
 
 module.exports = routerApi;
