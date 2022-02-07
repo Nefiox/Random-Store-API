@@ -20,6 +20,7 @@ class AuthService {
       throw boom.unauthorized();
     }
     delete user.dataValues.password;
+    delete user.dataValues.recoveryToken;
     return user;
   }
 
@@ -45,7 +46,7 @@ class AuthService {
     const token = jwt.sign(payload, config.jwtRecoverySecret, {
       expiresIn: '15min',
     });
-    const link = `http://myfrontend.com/recovery?token=${token}`;
+    const link = `https://myfrontend.com/recovery?token=${token}`;
     await service.update(user.id, { recoveryToken: token });
     const mail = {
       from: `"Nefiox Boo 👻" <${config.mailerEmail}>`,
@@ -58,10 +59,27 @@ class AuthService {
     return rta;
   }
 
+  async changePassword(token, newPassword) {
+    try {
+      const payload = await jwt.verify(token, config.jwtRecoverySecret);
+      const user = await service.findOne(payload.sub);
+
+      if (user.recoveryToken !== token) {
+        throw boom.unauthorized();
+      }
+
+      const hash = await bcrypt.hash(newPassword, 10);
+      await service.update(user.id, { recoveryToken: null, password: hash });
+      return { message: 'Password changed' };
+    } catch (error) {
+      throw boom.unauthorized();
+    }
+  }
+
   async sendMail(infoMail) {
     const transporter = nodemailer.createTransport({
       host: 'smtp.gmail.com',
-      secure: true, // true for 465, false for other ports
+      secure: true,
       port: 465,
       auth: {
         user: config.mailerEmail,
